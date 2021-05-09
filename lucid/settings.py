@@ -25,12 +25,13 @@ SECRET_KEY = '51r=6wd8_n)*l_i9tlbjhh6l6#!$+95#_x%4h-%54a++*6$trm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["*"]
+import os
 
 # Application definition
 
 INSTALLED_APPS = [
+    'registration.apps.RegistartionConfig',
     'practice.apps.PracticeConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -56,7 +57,7 @@ ROOT_URLCONF = 'lucid.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

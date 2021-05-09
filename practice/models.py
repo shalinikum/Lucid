@@ -7,13 +7,14 @@ class Doctor(models.Model):
     name = models.CharField(max_length=50)
     clinic = models.CharField(max_length=50)
     consultation_fee = models.IntegerField(default=500)
-    email = models.TextField()
+    email = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
 
 class User(models.Model):
     name = models.CharField(max_length=50)
+    user_name  = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=20)
     email = models.CharField(max_length=50)
     gender = models.CharField(max_length=50)
@@ -34,7 +35,7 @@ class Appointment(models.Model):
 class WordsAttribute(models.Model):
     phoneme = models.CharField(max_length=50)
     place = models.CharField(max_length=50)
-    illustration_video = models.CharField(max_length=50)
+    illustration_video = models.CharField(max_length=50,blank=True)
 
     def __str__(self):
         return self.phoneme
@@ -54,8 +55,12 @@ class UserRecording(models.Model):
     user =  models.ForeignKey(User, on_delete=models.CASCADE)
     word =   models.ForeignKey(Word, on_delete=models.CASCADE)
     date = models.DateTimeField('date published')
+    def __str__(self):
+        return  self.word
 
 class UserTask(models.Model):
     task = models.ForeignKey(WordsAttribute, on_delete=models.CASCADE)
     count = models.IntegerField(default=10)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
+
