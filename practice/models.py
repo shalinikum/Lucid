@@ -21,7 +21,7 @@ class User(models.Model):
     age = models.IntegerField()
     therapist = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     password = models.CharField(max_length=50)
-    joining_date = models.DateTimeField('date published')
+    joining_date = models.DateTimeField('date published', blank=True)
 
     def __str__(self):
         return self.name

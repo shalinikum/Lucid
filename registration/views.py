@@ -1,24 +1,27 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User ,auth
+from django.contrib.auth.models import auth
 # Create your views her
-
-def registration(request):
+from django.db import models
+from practice.models import User
+import datetime
+from django.utils import timezone
+def register(request):
 
     if request.method == "POST":
-        Name =  request.POST['Name']
+        name =  request.POST["name"]
         email =  request.POST['email']
-        Gender =  request.POST['Gender']
-        Therapist =  request.POST['Therapist']
-        Phone_no =  request.POST['Phone_no']
+        gender =  request.POST['gender']
+        therapist =  request.POST['therapist']
+        phone_number =  request.POST['phone_number']
         password1 =  request.POST['password1']
         password2 =  request.POST['password2']
-
-        user = User.objects.create_user(name=Name,email=email,gender=Gender, therapist=Therapist,phone_number=Phone_no, password=password1, age=age)
-        user.save()
+        age = int(request.POST['age'])
+        user_name = request.POST['user_name']
+    
+        user = User(name=name,email=email,gender=gender, therapist_id=therapist,phone_number=phone_number, password=password1, age=age, user_name=user_name,joining_date=timezone.now())
+        user.save();
         print('user created')
-        return redirect('/')
+        return redirect('/practice')
     else:
         return render(request,'register.html')
 
-def register(request):
-    return render(request, login.html)
